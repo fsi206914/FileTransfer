@@ -1,0 +1,6 @@
+Network File Transfer App
+=========================
+
+Network File Transfer application using sockets in Java.
+
+Allows you to transfer files to and from a server over a network.
