@@ -166,6 +166,7 @@ class ClientWorker implements Runnable {
 			msgOut = new PrintWriter(msg.getOutputStream(), true);
 
 			line = msgIn.readLine();
+			if(line == null) System.out.println("line is null in run");
 			String[] cmd = line.toString().split(":");
 
 			if (line != null && cmd != null) {
@@ -213,7 +214,6 @@ class ClientWorker implements Runnable {
 						msgOut.println("500");
 					}
 				}
-
 			}
 			client.close();
 			msg.close();
@@ -226,4 +226,3 @@ class ClientWorker implements Runnable {
 		}
 	}
 }
-

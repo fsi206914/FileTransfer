@@ -1,4 +1,5 @@
 import java.net.Socket;
+import java.net.InetAddress;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -107,8 +108,9 @@ public class Client{
 		
 		String option = null;
 		try {
-			data = new Socket(hostname, 4444);
-			msg = new Socket(hostname, 4445);
+			System.out.println("Before Client listening...");
+			data = new Socket(InetAddress.getByName(hostname), 4444);
+			msg = new Socket(InetAddress.getByName(hostname), 4445);
 			System.out.println("Client listening...");
 		} catch (IOException e) {
 			System.out.println("Could not listen " + e);
@@ -136,10 +138,10 @@ public class Client{
 				}
 
 			} else if (action.equals("Download")) {
-				System.out.println("Downloading the file now.");
 				
 				msgOut.println("d:" + openFile + ":" + saveFile);
 				receiveFile(new File(saveFile));
+				System.out.println("Downloading the file complete.");
 
 			} else if (action.equals("List")) {
 
@@ -209,9 +211,9 @@ public class Client{
 
 			if (cmd.compareTo("send") == 0) {
 				switch (fields.length) {
-					case 2: // ls job
+					case 3: // ls job
 						this.openFile = fields[1];
-						this.saveFile = "/home/liang/Desktop/upload";
+						this.saveFile = fields[2];
 						go("Upload");
 						break;
 					default:
